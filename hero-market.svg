@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07182c"/><stop offset="1" stop-color="#0e6fb8"/></linearGradient><filter id="sh"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity=".2"/></filter></defs>
+<rect width="1200" height="720" rx="34" fill="url(#bg)"/>
+<circle cx="1040" cy="110" r="230" fill="#65d6e8" opacity=".09"/><circle cx="900" cy="620" r="280" fill="#fff" opacity=".04"/>
+<g filter="url(#sh)"><rect x="170" y="105" width="860" height="500" rx="28" fill="#f9fbfd"/><rect x="170" y="105" width="860" height="66" rx="28" fill="#eef4f8"/><circle cx="215" cy="138" r="8" fill="#d4dde7"/><circle cx="242" cy="138" r="8" fill="#d4dde7"/><circle cx="269" cy="138" r="8" fill="#d4dde7"/>
+<rect x="210" y="205" width="300" height="54" rx="14" fill="#0b1c31"/><rect x="540" y="205" width="210" height="54" rx="14" fill="#eaf3ff"/><rect x="780" y="205" width="210" height="54" rx="14" fill="#eaf3ff"/>
+<rect x="210" y="300" width="250" height="230" rx="20" fill="#fff" stroke="#dce5ef"/><rect x="490" y="300" width="500" height="230" rx="20" fill="#fff" stroke="#dce5ef"/>
+<rect x="240" y="336" width="116" height="14" rx="7" fill="#8ea5bd"/><rect x="240" y="372" width="170" height="42" rx="10" fill="#eaf3ff"/><rect x="240" y="430" width="170" height="42" rx="10" fill="#eef8f5"/><rect x="240" y="488" width="132" height="12" rx="6" fill="#c8d5e1"/>
+<polyline points="540,468 595,430 650,454 705,390 760,415 820,346 880,370 940,324" fill="none" stroke="#0b67d1" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><circle cx="940" cy="324" r="12" fill="#18a7c9"/>
+<rect x="540" y="336" width="178" height="14" rx="7" fill="#8ea5bd"/><rect x="540" y="505" width="355" height="10" rx="5" fill="#dbe6ef"/><rect x="540" y="525" width="280" height="10" rx="5" fill="#e5edf4"/>
+</g>
+<g font-family="Arial,Helvetica,sans-serif" fill="#fff"><text x="82" y="630" font-size="28" font-weight="700" opacity=".94">Identität · Gesamtpreis · Verfügbarkeit · Marktbild</text></g></svg>
