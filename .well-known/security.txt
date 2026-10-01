@@ -1,0 +1,4 @@
+Contact: mailto:info@nbhandel.de
+Canonical: https://nbhandel.de/.well-known/security.txt
+Preferred-Languages: de, en
+Expires: 2027-10-01T00:00:00Z
