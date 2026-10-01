@@ -1,0 +1,56 @@
+name: Install final NBHandel release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/install-release.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract release
+        run: |
+          rm -rf /tmp/nbh-release
+          mkdir -p /tmp/nbh-release
+          unzip -q NBHandel_FINAL_UPLOAD_2026-10-01.zip -d /tmp/nbh-release
+
+          test -f /tmp/nbh-release/WEBSITE_FINAL/index.html
+          test -f /tmp/nbh-release/WEBSITE_FINAL/.well-known/security.txt
+
+          COUNT=$(find /tmp/nbh-release/WEBSITE_FINAL -type f | wc -l)
+          echo "Release files: $COUNT"
+          test "$COUNT" -eq 128
+
+      - name: Replace website
+        run: |
+          rsync -a --delete \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.nojekyll' \
+            /tmp/nbh-release/WEBSITE_FINAL/ ./
+
+          rm -f NBHandel_FINAL_UPLOAD_2026-10-01.zip
+          rm -f .github/workflows/install-release.yml
+
+          test -f index.html
+          test -f .well-known/security.txt
+          test -f .nojekyll
+
+      - name: Commit final website
+        run: |
+          git config user.name "NBHandel Deploy"
+          git config user.email "info@nbhandel.de"
+
+          git add -A
+          git commit -m "Install final website release"
+          git push
