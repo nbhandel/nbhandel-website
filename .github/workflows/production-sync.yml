@@ -33,18 +33,18 @@ jobs:
           rm -rf _site
           mkdir -p _site
           curl -fsSL --retry 3 "$BASE/" -o _site/index.html
-          routes="tools ratgeber kontakt themen methodik transparenz unternehmen impressum datenschutz ean-gtin-pruefen barcode-scanner gesamtpreisrechner stueck-grundpreis rabattrechner preisaenderung bundle-vergleich versandfreigrenze kosten-pro-nutzung stromkostenrechner break-even angebotsvergleich kaufcheck finanzierungs-gesamtbetrag cashback-gutschein abo-kosten brutto-netto link-bereiniger angebots-check rueckgabe-serviceplaner deal-check produktpass preisbeobachtung ratgeber-bewertungen ratgeber-rabatte ratgeber-preisverlauf ratgeber-versandkosten ratgeber-ruecksendekosten ratgeber-garantie-gewaehrleistung ratgeber-verfuegbarkeit ratgeber-kaufentscheidung ratgeber-marktplatz-haendler ratgeber-finanzierung ratgeber-preisschwankungen ratgeber-gesamtpreis ratgeber-produktidentitaet ratgeber-zustand ratgeber-bundles ratgeber-haendlervertrauen produkte-technik-elektronik produkte-haushalt-wohnen produkte-beauty-pflege produkte-sport-freizeit produkte-sammeln-hobby produkte-buero-papier produkte-tierbedarf partner"
+ routes="tools produkte ratgeber kontakt themen methodik transparenz unternehmen impressum datenschutz ean-gtin-pruefen barcode-scanner gesamtpreisrechner stueck-grundpreis rabattrechner preisaenderung bundle-vergleich versandfreigrenze kosten-pro-nutzung stromkostenrechner break-even angebotsvergleich kaufcheck finanzierungs-gesamtbetrag cashback-gutschein abo-kosten brutto-netto link-bereiniger angebots-check rueckgabe-serviceplaner deal-check produktpass preisbeobachtung ratgeber-bewertungen ratgeber-rabatte ratgeber-preisverlauf ratgeber-versandkosten ratgeber-ruecksendekosten ratgeber-garantie-gewaehrleistung ratgeber-verfuegbarkeit ratgeber-kaufentscheidung ratgeber-marktplatz-haendler ratgeber-finanzierung ratgeber-preisschwankungen ratgeber-gesamtpreis ratgeber-produktidentitaet ratgeber-zustand ratgeber-bundles ratgeber-haendlervertrauen produkte-technik-elektronik produkte-haushalt-wohnen produkte-beauty-pflege produkte-sport-freizeit produkte-sammeln-hobby produkte-buero-papier produkte-tierbedarf partner"
           for r in $routes; do
-            curl -fsSL --retry 3 "$BASE/$r" -o "_site/$r.html"
+ curl -fsSL --retry 3 "$BASE/$r" -o "_site/$r.html"
           done
-          curl -fsSL --retry 3 "$BASE/404" -o _site/404.html || cp _site/index.html _site/404.html
+ curl -fsSL --retry 3 "$BASE/404" -o _site/404.html || cp _site/index.html _site/404.html
           for f in _site/*.html; do
-            sed -i -e 's#https://nbhandel-16b9f2\.webflow\.io#https://nbhandel.de#g' -e 's#http://nbhandel-16b9f2\.webflow\.io#https://nbhandel.de#g' -e 's#lang="en"#lang="de"#g' -e 's#data-wf-status="1"#data-wf-status="0"#g' "$f"
+ sed -i -e 's#https://nbhandel-16b9f2\.webflow\.io#https://nbhandel.de#g' -e 's#http://nbhandel-16b9f2\.webflow\.io#https://nbhandel.de#g' -e 's#lang="en"#lang="de"#g' -e 's#data-wf-status="1"#data-wf-status="0"#g' "$f"
           done
-          printf 'nbhandel.de\n' > _site/CNAME
+ printf 'nbhandel.de\n' > _site/CNAME
           touch _site/.nojekyll
-          if [ -d .well-known ]; then cp -R .well-known _site/.well-known; fi
-          printf 'User-agent: *\nAllow: /\n' > _site/robots.txt
+ if [ -d .well-known ]; then cp -R .well-known _site/.well-known; fi
+          printf 'User-agent: * Allow: / ' > _site/robots.txt
           test -s _site/index.html
           test -s _site/partner.html
           test -s _site/produkte-technik-elektronik.html
