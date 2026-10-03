@@ -40,6 +40,70 @@ jobs:
           test -s _site/index.html
           test -s _site/produkte.html
           test -s _site/partner.html
+      - name: Publish native favicon files
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import struct
+          import urllib.request
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class Icons(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.items = []
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  if tag == 'link' and attrs.get('rel') in ('icon', 'apple-touch-icon'):
+                      self.items.append(attrs)
+
+          site = Path('_site')
+          parser = Icons()
+          parser.feed((site / 'index.html').read_text())
+          urls, images = {}, {}
+          for icon in parser.items:
+              url = icon['href']
+              size = int(icon['sizes'].split('x')[0])
+              kind = icon['rel']
+              if url not in urls:
+                  if not url.startswith('https://cdn.prod.website-files.com/'):
+                      raise RuntimeError('Unexpected favicon source: ' + url)
+                  with urllib.request.urlopen(url, timeout=30) as response:
+                      data = response.read()
+                  if data[:8] != b'\x89PNG\r\n\x1a\n' or struct.unpack('>II', data[16:24]) != (size, size):
+                      raise RuntimeError('Invalid favicon PNG or dimensions: ' + url)
+                  name = 'apple-touch-icon.png' if kind == 'apple-touch-icon' else f'favicon-{size}.png'
+                  (site / name).write_bytes(data)
+                  version = hashlib.sha256(data).hexdigest()[:12]
+                  urls[url] = f'/{name}?v={version}'
+                  images[(kind, size)] = data
+
+          for key in [('icon', 32), ('icon', 48), ('apple-touch-icon', 180)]:
+              if key not in images:
+                  raise RuntimeError('Required favicon missing: ' + str(key))
+          frames = [(size, images[('icon', size)]) for size in (32, 48)]
+          offset = 6 + 16 * len(frames)
+          ico = struct.pack('<HHH', 0, 1, len(frames))
+          for size, data in frames:
+              ico += struct.pack('<BBBBHHII', size, size, 0, 0, 1, 32, len(data), offset)
+              offset += len(data)
+          ico += b''.join(data for _, data in frames)
+          (site / 'favicon.ico').write_bytes(ico)
+          (site / 'apple-touch-icon-precomposed.png').write_bytes(images[('apple-touch-icon', 180)])
+
+          # Preserve each page's markup; change only its existing icon URLs.
+          count = 0
+          for page in site.glob('*.html'):
+              html = page.read_text()
+              for source, local in urls.items():
+                  html = html.replace(source, local)
+              page.write_text(html)
+              count += 1
+          print(f'Published {len(urls)} native PNG icons, favicon.ico and Apple fallback for {count} pages.')
+          PY
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v5
         with:
