@@ -1,0 +1,51 @@
+name: Sync NBHandel live v3
+on: {workflow_dispatch: {}}
+permissions: {contents: read, pages: write, id-token: write, actions: write}
+concurrency: {group: nbhandel-live-v3, cancel-in-progress: false}
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.d.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - shell: bash
+        run: |
+          set -euo pipefail
+          B=https://nbhandel-16b9f2.webflow.io; rm -rf _site; mkdir _site
+          curl -fsSL --retry 3 "$B/" -o _site/index.html
+          R="tools produkte ratgeber kontakt themen methodik transparenz unternehmen impressum datenschutz ean-gtin-pruefen barcode-scanner gesamtpreisrechner stueck-grundpreis rabattrechner preisaenderung bundle-vergleich versandfreigrenze kosten-pro-nutzung stromkostenrechner break-even angebotsvergleich kaufcheck finanzierungs-gesamtbetrag cashback-gutschein abo-kosten brutto-netto link-bereiniger angebots-check rueckgabe-serviceplaner deal-check produktpass preisbeobachtung ratgeber-bewertungen ratgeber-rabatte ratgeber-preisverlauf ratgeber-versandkosten ratgeber-ruecksendekosten ratgeber-garantie-gewaehrleistung ratgeber-verfuegbarkeit ratgeber-kaufentscheidung ratgeber-marktplatz-haendler ratgeber-finanzierung ratgeber-preisschwankungen ratgeber-gesamtpreis ratgeber-produktidentitaet ratgeber-zustand ratgeber-bundles ratgeber-haendlervertrauen produkte-technik-elektronik produkte-haushalt-wohnen produkte-beauty-pflege produkte-sport-freizeit produkte-sammeln-hobby produkte-buero-papier produkte-tierbedarf partner"
+          for r in $R; do curl -fsSL --retry 3 "$B/$r" -o "_site/$r.html"; done
+          curl -fsSL --retry 3 "$B/404" -o _site/404.html || cp _site/index.html _site/404.html
+          for f in _site/*.html; do sed -i -e 's#https://nbhandel-16b9f2\.webflow\.io#https://nbhandel.de#g' -e 's#lang="en"#lang="de"#g' -e 's#data-wf-status="1"#data-wf-status="0"#g' "$f"; done
+          printf 'nbhandel.de\n' > _site/CNAME; touch _site/.nojekyll; [ ! -d .well-known ] || cp -R .well-known _site/.well-known
+          for x in favicon.ico favicon-32.png favicon-48.png favicon-192.png favicon-512.png apple-touch-icon.png apple-touch-icon-precomposed.png; do curl -fsSL "https://nbhandel.de/$x" -o "_site/$x"; done
+          python3 - <<'PY2'
+          import re
+          from pathlib import Path
+          S=Path('_site'); O='https://nbhandel.de'; U=[]
+          for p in S.glob('*.html'):
+           s=p.read_text()
+           for z,n in [(32,'favicon-32.png'),(48,'favicon-48.png'),(180,'apple-touch-icon.png'),(192,'favicon-192.png'),(512,'favicon-512.png')]: s=re.sub(r'href="[^"]+"(?=[^>]*sizes="%dx%d")'%(z,z),'href="/%s"'%n,s)
+           if p.name!='404.html':
+            q='/' if p.name=='index.html' else '/'+p.stem; u=O+q; U.append(u); s=re.sub(r'<link\b[^>]*\brel=["\']canonical["\'][^>]*>','',s,flags=re.I); s=re.sub(r'<meta\b[^>]*\bproperty=["\']og:url["\'][^>]*>','',s,flags=re.I); s=s.replace('</head>',f'<link rel="canonical" href="{u}"><meta property="og:url" content="{u}"></head>',1)
+           p.write_text(s)
+          (S/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+'\n'.join(f'<url><loc>{u}</loc></url>' for u in sorted(U))+'\n</urlset>\n')
+          (S/'robots.txt').write_text('User-agent: *\nAllow: /\n\nSitemap: https://nbhandel.de/sitemap.xml\n')
+          PY2
+          test -s _site/sitemap.xml; grep -Fq 'Sitemap: https://nbhandel.de/sitemap.xml' _site/robots.txt; grep -Fq 'rel="canonical" href="https://nbhandel.de/tools"' _site/tools.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v5
+        with: {path: _site, include-hidden-files: true}
+      - id: d
+        uses: actions/deploy-pages@v4
+      - if: ${{ success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          curl -fsSL -X PUT
+          -H "Accept: application/vnd.github+json"
+          -H "Authorization: Bearer $GH_TOKEN"
+          -H "X-GitHub-Api-Version: 2022-11-28"
+          https://api.github.com/repos/nbhandel/nbhandel-website/actions/workflows/sync-live-v2.yml/disable
