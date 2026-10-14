@@ -1,0 +1,85 @@
+name: NBH one-off systemd restore proof
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nbh-once-systemd-restore
+  cancel-in-progress: false
+
+jobs:
+  real-systemd:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Real systemd daemon-reload and scoped cleanup on throwaway VM
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          name=nbhstage0ci
+          tree=/opt/nbh-stage0-ci-only
+          unit=/etc/systemd/system/nbh-stage0-ci-only.service
+          echo "UTC $(date -u --iso-8601=seconds)"
+          echo "Systemd $(systemctl --version | head -1)"
+          test "$(cat /proc/1/comm)" = systemd || { echo NOT_REAL_SYSTEMD; exit 70; }
+          test ! -e "$unit"
+          test ! -e "$tree"
+          ! getent passwd "$name"
+          ! getent group "$name"
+          cleanup() {
+            local status=$?
+            trap - EXIT
+            set +e
+            sudo rm -f -- "$unit"
+            sudo systemctl daemon-reload
+            sudo rm -rf -- "$tree"
+            if getent passwd "$name" >/dev/null; then sudo userdel "$name"; fi
+            if getent group "$name" >/dev/null; then sudo groupdel "$name"; fi
+            if [[ -e "$unit" || -e "$tree" ]] || getent passwd "$name" >/dev/null || getent group "$name" >/dev/null; then
+              echo 'CLEANUP_FAILED'; exit 71
+            fi
+            if sudo systemctl show nbh-stage0-ci-only.service -p LoadState --value | grep -q '^loaded$'; then
+              echo 'UNIT_STILL_LOADED'; exit 72
+            fi
+            echo "SCOPED_CLEANUP_PASS $(date -u --iso-8601=seconds)"
+            exit "$status"
+          }
+          trap cleanup EXIT
+          sudo groupadd --system "$name"
+          sudo useradd --system --no-create-home --gid "$name" --shell /usr/sbin/nologin "$name"
+          sudo usermod --lock "$name"
+          sudo install -d -o root -g root -m 0755 "$tree"
+          for n in 1 2 3 4 5; do
+            printf 'disposable-test-payload-%s\n' "$n" | sudo tee "$tree/file-$n" >/dev/null
+            sudo chown root:root "$tree/file-$n"
+            sudo chmod 0444 "$tree/file-$n"
+          done
+          sudo tee "$unit" >/dev/null <<'UNIT'
+          [Unit]
+          Description=Disposable NBH stage-zero systemd restore test
+          [Service]
+          Type=oneshot
+          User=nbhstage0ci
+          Group=nbhstage0ci
+          ExecStart=/usr/bin/true
+          NoNewPrivileges=yes
+          ProtectSystem=strict
+          PrivateTmp=yes
+          RestrictAddressFamilies=AF_UNIX
+          IPAddressDeny=any
+          [Install]
+          # No WantedBy: disabled/static and never started
+          UNIT
+          sudo chown root:root "$unit"
+          sudo chmod 0444 "$unit"
+          sudo systemd-analyze verify "$unit"
+          sudo systemctl daemon-reload
+          test "$(sudo systemctl show nbh-stage0-ci-only.service -p LoadState --value)" = loaded
+          test "$(sudo systemctl show nbh-stage0-ci-only.service -p UnitFileState --value)" = static
+          ! sudo systemctl is-active --quiet nbh-stage0-ci-only.service
+          test "$(find "$tree" -maxdepth 1 -type f | wc -l)" -eq 5
+          echo "REAL_SYSTEMD_RELOAD_PASS $(date -u --iso-8601=seconds)"
+          # EXIT trap verifies true daemon-reload after removal and all cleanup
