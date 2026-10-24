@@ -33,9 +33,15 @@ def main() -> None:
     assert (ROOT / "CNAME").read_text().strip() == "nbhandel.de"
     required = ["index.html","impressum.html","datenschutz.html",
                 "transparenz.html","angebotsvergleich.html",
-                "produktpass.html","barcode-scanner.html","partner.html","produkte.html"]
+                "produktpass.html","barcode-scanner.html","partner.html","produkte.html","produktfinder.html"]
     for p in required:
         assert (ROOT/p).is_file(), p
+    finder_html = (ROOT / "produktfinder.html").read_text(encoding="utf-8")
+    assert 'name="robots" content="noindex,nofollow"' in finder_html, "Productfinder must remain noindex until released"
+    finder_data = json.loads((ROOT / "data/productfinder/sample-catalog.v1.json").read_text(encoding="utf-8"))
+    assert finder_data["mode"] == "sample"
+    assert finder_data["activation"]["offersEnabled"] is False
+    assert len(finder_data["products"]) == 24 and not finder_data["offers"]
     found_assets, sri_checked = 0, 0
     for route in routes:
         filepath = ROOT / ("index.html" if not route else route + ".html")
