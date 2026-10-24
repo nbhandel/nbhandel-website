@@ -33,12 +33,13 @@ jobs:
           test -s site/datenschutz.html
           test -s site/transparenz.html
           test -s site/angebotsvergleich.html
+          test -s site/produkte.html
           test -s site/vendor/webflow/6abedad969a74cbc62fc1fbe/css/nbhandel-16b9f2.webflow.shared.a60608b14.css
           python3 - <<'PY'
           import json
           from pathlib import Path
           m=json.loads(Path('docs/github-live-source-manifest.json').read_text())
-          assert m['route_count']==57
+          assert m['route_count']==58
           assert m['verified_no_broken_owned_assets']
           assert m['local_subresource_integrity_tags_recomputed']>=57
           print('SOURCE_IMPORT_VERIFIED',m['files'],m['bytes'])
