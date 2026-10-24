@@ -56,6 +56,9 @@ button { cursor: pointer; }
 .pf-primary { border:none; border-radius:11px; padding:0 22px; background:linear-gradient(112deg,#316bfa,#614af1); color:#fff; font-weight:750; white-space:nowrap; transition:filter .15s ease; }
 .pf-primary:hover { filter:brightness(1.10); }
 .pf-input-hint { font-size:12px; color:#a9b8d2; margin:11px 0 0; }
+.pf-quick-links { display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; }
+.pf-quick-links a { font-size:13px; font-weight:700; color:#b9ccff; text-decoration:underline; text-underline-offset:3px; }
+.pf-quick-links a:hover { color:#fff; }
 .pf-hero-aside { border:1px solid #455378; background:#ffffff0b; border-radius:24px; padding:30px; backdrop-filter:blur(8px); box-shadow:0 30px 80px #02071038; }
 .pf-step { display:block; font-size:12px; text-transform:uppercase; letter-spacing:.12em; color:#92b8ff; font-weight:800; margin-bottom:10px; }
 .pf-hero-aside strong { display:block; font-size:22px; letter-spacing:-.025em; }
