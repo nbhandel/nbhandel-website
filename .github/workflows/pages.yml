@@ -1,9 +1,13 @@
-name: Deploy NBHandel Pages
+name: Deploy NBHandel Pages from GitHub source
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+      - 'tools/verify_site.py'
+      - 'docs/github-live-source-manifest.json'
   workflow_dispatch:
 
 permissions:
@@ -12,110 +16,41 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: nbh-github-pages-production
   cancel-in-progress: false
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout immutable GitHub source
         uses: actions/checkout@v4
-
-      - name: Build production site from current Webflow staging
+      - name: Check public source (no Webflow/affiliate API access)
+        run: python3 tools/verify_site.py site
+      - name: Assemble production files strictly from this commit
         shell: bash
         run: |
           set -euo pipefail
-          STAGING="https://nbhandel-16b9f2.webflow.io"
-          rm -rf _site
           mkdir -p _site
-
-          routes=(
-            ""
-            "tools"
-            "ratgeber"
-            "kontakt"
-            "themen"
-            "methodik"
-            "transparenz"
-            "unternehmen"
-            "impressum"
-            "datenschutz"
-            "ean-gtin-pruefen"
-            "barcode-scanner"
-            "gesamtpreisrechner"
-            "stueck-grundpreis"
-            "rabattrechner"
-            "preisaenderung"
-            "bundle-vergleich"
-            "versandfreigrenze"
-            "kosten-pro-nutzung"
-            "stromkostenrechner"
-            "break-even"
-            "angebotsvergleich"
-            "kaufcheck"
-            "finanzierungs-gesamtbetrag"
-            "cashback-gutschein"
-            "abo-kosten"
-            "brutto-netto"
-            "link-bereiniger"
-            "angebots-check"
-            "rueckgabe-serviceplaner"
-            "deal-check"
-            "produktpass"
-            "preisbeobachtung"
-            "ratgeber-bewertungen"
-            "ratgeber-rabatte"
-            "ratgeber-preisverlauf"
-            "ratgeber-versandkosten"
-            "ratgeber-ruecksendekosten"
-            "ratgeber-garantie-gewaehrleistung"
-            "ratgeber-verfuegbarkeit"
-            "ratgeber-kaufentscheidung"
-            "ratgeber-marktplatz-haendler"
-            "ratgeber-finanzierung"
-            "ratgeber-preisschwankungen"
-            "ratgeber-gesamtpreis"
-            "ratgeber-produktidentitaet"
-            "ratgeber-zustand"
-            "ratgeber-bundles"
-            "ratgeber-haendlervertrauen"
-            "produkte-technik-elektronik"
-            "produkte-haushalt-wohnen"
-            "produkte-beauty-pflege"
-            "produkte-sport-freizeit"
-            "produkte-sammeln-hobby"
-            "produkte-buero-papier"
-            "produkte-tierbedarf"
-            "partner"
-          )
-
-          for route in "${routes[@]}"; do
-            if [ -z "$route" ]; then
-              url="$STAGING/"
-              out="_site/index.html"
-            else
-              url="$STAGING/$route"
-              out="_site/$route.html"
-            fi
-
-            echo "Fetching $url -> $out"
-            curl --fail --location --retry 3 --retry-delay 2 --connect-timeout 20 --max-time 90 "$url" --output "$out"
-
-            sed -i               -e 's#https://nbhandel-16b9f2\.webflow\.io#https://nbhandel.de#g'               -e 's#http://nbhandel-16b9f2\.webflow\.io#https://nbhandel.de#g'               -e 's#lang="en"#lang="de"#g'               -e 's#data-wf-status="1"#data-wf-status="0"#g'               "$out"
-          done
-
-          curl --fail --location --retry 3 --retry-delay 2 "$STAGING/404" --output "_site/404.html" || cp "_site/index.html" "_site/404.html"
-          sed -i             -e 's#https://nbhandel-16b9f2\.webflow\.io#https://nbhandel.de#g'             -e 's#lang="en"#lang="de"#g'             -e 's#data-wf-status="1"#data-wf-status="0"#g'             "_site/404.html"
-
-          printf 'nbhandel.de\n' > _site/CNAME
-          touch _site/.nojekyll
-
-          if [ -d .well-known ]; then
-            cp -R .well-known _site/.well-known
-          fi
-
-          cat > _site/robots.txt && echo "Done replacing content"
+          cp -a site/. _site/
+          test -s _site/index.html
+          test -s _site/datenschutz.html
+          test -s _site/transparenz.html
+          test -s _site/impressum.html
+          test "$(cat _site/CNAME)" = nbhandel.de
+          test -f _site/.nojekyll
+          echo 'Production source is GitHub checkout site/. No Webflow fetch.'
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload production artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+          include-hidden-files: true
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
