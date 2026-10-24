@@ -8,6 +8,7 @@ This script is NOT part of the production deployment workflow.
 from __future__ import annotations
 
 import concurrent.futures
+import base64
 import hashlib
 import html
 import json
@@ -82,6 +83,35 @@ def save(path: Path, data: bytes) -> None:
     path.write_bytes(data)
 
 
+
+def refresh_integrity_tags() -> int:
+    """After mirroring and rewriting local CSS/JS, recompute SRI for each local file."""
+    tag_re = re.compile(r'<(?:link|script)\b[^>]*>', re.I | re.S)
+    location_re = re.compile(r'\b(?:src|href)=(["\'])(/vendor/webflow/[^"\']+)\1', re.I)
+    integrity_re = re.compile(r'\bintegrity=(["\'])(sha(?:256|384|512)-[^"\']+)\1', re.I)
+    replaced = 0
+    for page in OUT.glob("*.html"):
+        html_content = page.read_text(encoding="utf-8")
+        def patch(match):
+            nonlocal replaced
+            tag = match.group(0)
+            loc = location_re.search(tag)
+            integ = integrity_re.search(tag)
+            if not loc or not integ:
+                return tag
+            asset = OUT / unquote(urlsplit(loc.group(2)).path.lstrip("/"))
+            if not asset.is_file():
+                raise RuntimeError(f"SRI target missing: {asset}")
+            algorithm = integ.group(2).split("-")[0].lower()
+            digest = base64.b64encode(hashlib.new(algorithm, asset.read_bytes()).digest()).decode("ascii")
+            new_integrity = algorithm + "-" + digest
+            replaced += 1
+            return tag[:integ.start(2)] + new_integrity + tag[integ.end(2):]
+        patched = tag_re.sub(patch, html_content)
+        page.write_text(patched, encoding="utf-8")
+    return replaced
+
+
 def main() -> None:
     routes = routes_from_workflow()
     if OUT.exists():
@@ -112,7 +142,7 @@ def main() -> None:
         "favicon.ico", "favicon-32.png", "favicon-48.png",
         "favicon-192.png", "favicon-512.png",
         "apple-touch-icon.png", "apple-touch-icon-precomposed.png",
-        "manifest.webmanifest", "robots.txt", "sitemap.xml",
+        "robots.txt", "sitemap.xml",
     ]
     for path in static_paths:
         save(OUT / path, fetch(ORIGIN + "/" + path))
@@ -153,6 +183,10 @@ def main() -> None:
         if sum(asset_sizes.values()) > MAX_TOTAL_BYTES:
             raise RuntimeError("Asset total exceeds cap")
 
+    sri_updated = refresh_integrity_tags()
+    if sri_updated < len(routes):
+        raise RuntimeError(f"Unexpectedly few local stylesheet SRI tags: {sri_updated}")
+
     # Ensure that every owned-CDN URL rewritten in source points to a real file.
     missing = []
     owned_refs = 0
@@ -161,7 +195,7 @@ def main() -> None:
             continue
         body = file.read_text(encoding="utf-8")
         for urlpath in set(re.findall(r'/vendor/webflow/[^\s"\'<>),]+', body)):
-            rel = urlpath.split("?")[0].split("#")[0]
+            rel = urlpath.split("?")[0].split("#")[0].rstrip(chr(92))
             owned_refs += 1
             decoded = unquote(rel.lstrip("/"))
             if not (OUT / decoded).is_file():
@@ -180,6 +214,7 @@ def main() -> None:
         "files": len(source_files),
         "bytes": sum(p.stat().st_size for p in source_files),
         "owned_asset_reference_checks": owned_refs,
+        "local_subresource_integrity_tags_recomputed": sri_updated,
         "verified_no_broken_owned_assets": True,
         "index_sha256": hashlib.sha256((OUT / "index.html").read_bytes()).hexdigest(),
         "index_note": "Webflow-origin design frozen from existing PUBLIC nbhandel.de; no website redesign",
