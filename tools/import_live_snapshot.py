@@ -20,6 +20,7 @@ import sys
 import time
 from urllib.parse import urljoin, urlsplit, unquote
 from urllib.request import Request, urlopen
+from xml.etree import ElementTree
 
 ORIGIN = "https://nbhandel.de"
 CDN = "https://cdn.prod.website-files.com/"
@@ -42,15 +43,23 @@ def fetch(url: str) -> bytes:
         return content
 
 
-def routes_from_workflow() -> list[str]:
-    workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
-    match = re.search(r'^\s*routes=\(\s*\n(.*?)\n\s*\)', workflow, re.S | re.M)
-    if not match:
-        raise RuntimeError("Original public route list not found")
-    routes = re.findall(r'^\s*"([^"]*)"\s*$', match.group(1), re.M)
-    if len(routes) < 45 or "" not in routes or len(set(routes)) != len(routes):
-        raise RuntimeError(f"Unexpected route list length/duplicates: {len(routes)}")
-    return routes
+def routes_from_sitemap() -> list[str]:
+    """Use actual PUBLIC published paths, not a possibly stale deployment list."""
+    sitemap = ElementTree.fromstring(fetch(ORIGIN + "/sitemap.xml"))
+    paths = []
+    for element in sitemap.iter():
+        if not element.tag.endswith("loc") or not element.text:
+            continue
+        parsed = urlsplit(element.text.strip())
+        if parsed.scheme != "https" or parsed.netloc != "nbhandel.de":
+            raise RuntimeError("Unexpected host in sitemap")
+        route = parsed.path.strip("/")
+        if not re.fullmatch(r"[a-z0-9-]*", route):
+            raise RuntimeError("Unexpected route path in sitemap: " + route)
+        paths.append(route)
+    if len(paths) < 58 or "" not in paths or len(set(paths)) != len(paths):
+        raise RuntimeError(f"Incomplete published sitemap: {len(paths)}")
+    return paths
 
 
 def safe_local_asset_path(url: str) -> Path:
@@ -113,7 +122,7 @@ def refresh_integrity_tags() -> int:
 
 
 def main() -> None:
-    routes = routes_from_workflow()
+    routes = routes_from_sitemap()
     if OUT.exists():
         shutil.rmtree(OUT)
     OUT.mkdir()
