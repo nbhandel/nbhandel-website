@@ -6,14 +6,14 @@
 - Auslieferung: GitHub Pages, Domain nbhandel.de, ausschließlich via .github/workflows/pages.yml.
 - Deployment: Der Workflow prüft mit tools/verify_site.py und veröffentlicht nur den GitHub-Checkout von site/. Kein Live-Abruf von Webflow und keine Neuerzeugung von HTML zur Deploy-Zeit.
 - Änderungen: Feature-Branch mit Pull Request. Erst nach fachlicher Prüfung und Freigabe auf main zusammenführen.
-- Webflow: Historische Design-/Erstellungsquelle. Die aktuelle öffentliche Live-Version wurde einmalig als GitHub-Dateien eingefroren. Webflow nicht voreilig kündigen: bestehende externe Ressourcen können es noch benötigen.
+- Webflow: Historische Design-/Erstellungsquelle. Die aktuelle öffentliche Live-Version wurde anhand der veröffentlichten Sitemap mit 58 Routen einmalig als GitHub-Dateien eingefroren. Webflow nicht voreilig kündigen: bestehende externe Ressourcen können es noch benötigen.
 
 ## Nachgewiesene Baseline
 
-- 57 öffentliche HTML-Seiten mit Tools, Design, Impressum, Datenschutz und Transparenz.
+- 58 öffentliche HTML-Seiten mit Tools, Design, Impressum, Datenschutz und Transparenz.
 - 57 eigene CDN-Ressourcen (CSS, JS, Bilder) lokalisiert nach site/vendor/webflow/.
-- 284 Subresource-Integrity-Verweise an die lokalisierten Dateien angepasst und geprüft.
-- 126 GitHub-Quelldateien im site/-Verzeichnis, etwa 34 MB.
+- 289 Subresource-Integrity-Verweise an die lokalisierten Dateien angepasst und geprüft.
+- 127 GitHub-Quelldateien im site/-Verzeichnis, etwa 34 MB.
 - Details: docs/github-live-source-manifest.json.
 - Das Importskript tools/import_live_snapshot.py war ausschließlich für den einmaligen Import vorgesehen. Es ist kein regulärer Live-Workflow.
 
