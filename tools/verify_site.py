@@ -29,11 +29,11 @@ def main() -> None:
     assert MANIFEST.is_file(), "Migration source manifest missing"
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     routes = manifest["route_names"]
-    assert len(routes) >= 57 and "" in routes
+    assert len(routes) >= 58 and "" in routes
     assert (ROOT / "CNAME").read_text().strip() == "nbhandel.de"
     required = ["index.html","impressum.html","datenschutz.html",
                 "transparenz.html","angebotsvergleich.html",
-                "produktpass.html","barcode-scanner.html","partner.html"]
+                "produktpass.html","barcode-scanner.html","partner.html","produkte.html"]
     for p in required:
         assert (ROOT/p).is_file(), p
     found_assets, sri_checked = 0, 0
