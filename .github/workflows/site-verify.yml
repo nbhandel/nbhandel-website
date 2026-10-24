@@ -1,0 +1,43 @@
+name: Validate GitHub-owned NBHandel source (no deployment)
+
+on:
+  push:
+    branches: [nbh-github-owned-site-20261024]
+    paths:
+      - 'site/**'
+      - 'tools/verify_site.py'
+      - '.github/workflows/site-verify.yml'
+      - 'docs/github-live-source-manifest.json'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+      - 'tools/verify_site.py'
+      - '.github/workflows/site-verify.yml'
+      - 'docs/github-live-source-manifest.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nbh-source-validation
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check only locally stored site, assets and integrity
+        run: python3 tools/verify_site.py site
+      - name: Verify no generated import or network fetch in production path
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s site/index.html
+          test -s site/impressum.html
+          test -s site/datenschutz.html
+          test -s site/transparenz.html
+          grep -Fq 'nbhandel.de' site/CNAME
