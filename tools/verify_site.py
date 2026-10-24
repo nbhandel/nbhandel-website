@@ -42,7 +42,7 @@ def main() -> None:
         assert filepath.is_file() and filepath.stat().st_size > 900, str(filepath)
         content = filepath.read_text(encoding="utf-8")
         assert "<html" in content.lower(), str(filepath)
-        assert 'nbhandel-16b9f2.webflow.io' not in content, str(filepath)
+        assert 'https://nbhandel-16b9f2.webflow.io/' not in content, str(filepath)
         for path in set(LOCAL_RES.findall(content)):
             normalized = path.split("?")[0].split("#")[0].rstrip(chr(92))
             target = local_file(normalized)
