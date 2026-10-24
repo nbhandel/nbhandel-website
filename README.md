@@ -1,4 +1,16 @@
-# NBHandel Website COMPLETE – 2026-10-01
+# NBHandel – Live-Website: GitHub als maßgebliche Quelle
+
+**Produktionsstand:** Die aktuelle Webflow-gestaltete Website wurde aus der öffentlichen Liveversion in den Ordner `site/` übernommen (58 Seiten, lokale CDN-Assets). Nur dieses Verzeichnis wird vom einzigen GitHub-Pages-Workflow `.github/workflows/pages.yml` veröffentlicht. Beim Deployment wird **nicht aus Webflow geladen**.
+
+**Weiterentwicklung:** Branch + Pull Request, Prüfung mit `python3 tools/verify_site.py site`, anschließend bewusstes Merge nach `main`. Datenschutz-/Cookie-Vorbereitung und vorhandene Website-Funktionen bleiben erhalten; Affiliate-Produktfeeds und Tracking sind noch nicht neu aktiviert.
+
+Betriebsanleitung: `docs/WEBSITE_LIVE_BETRIEB.md`. Die älteren HTML-Dateien im Repository-Stamm sind **historischer Code und nicht die aktuelle Produktionsquelle**.
+
+---
+
+## Historische Projektbeschreibung vor der GitHub-Quellumstellung
+
+### Ursprüngliche statische Version vom 01.10.2026
 
 Statische Portalversion mit maximal sinnvollen Browserfunktionen ohne erfundene Live-Marktdaten.
 
