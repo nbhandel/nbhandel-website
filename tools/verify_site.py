@@ -36,6 +36,23 @@ def main() -> None:
                 "produktpass.html","barcode-scanner.html","partner.html","produkte.html"]
     for p in required:
         assert (ROOT/p).is_file(), p
+    # Native search modifies existing homepage and product overview builders only.
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    products = (ROOT / "produkte.html").read_text(encoding="utf-8")
+    assert 'Handel.<br><em>Daten.</em><br>Entscheidungen.' in home
+    assert 'nbh59-carousel' in home and 'nbh34-hero' in home
+    assert 'nbh34-compare' in home
+    assert 'nbh49-products-grid' in products and 'nbh49-products-hero' in products
+    assert 'id="nbh61Catalog"' in products
+    assert 'id="nbh61SearchForm"' in products
+    assert 'assets/search/native-search.mjs' in products
+    assert 'assets/search/native-search.css' in products
+    assert 'nbl-hero' not in home and 'nbl-hero' not in products
+    catalog = json.loads((ROOT / "data/search/original-products.v1.json").read_text(encoding="utf-8"))
+    assert catalog["mode"] == "sample" and catalog["activation"]["offersEnabled"] is False
+    assert len(catalog["products"]) == 24 and catalog["offers"] == []
+    assert all("price" not in entry and "sources" not in entry for entry in catalog["products"])
+
     found_assets, sri_checked = 0, 0
     for route in routes:
         filepath = ROOT / ("index.html" if not route else route + ".html")
