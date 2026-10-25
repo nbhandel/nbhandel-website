@@ -75,6 +75,10 @@ test('Original homepage composition and all product-category pages are preserved
   assert.ok(home.includes('nbh34-hero'));
   assert.ok(home.includes('nbh60ProductSearch'));
   assert.ok(home.includes('/produkte?q='));
+  assert.ok(home.includes("fetch('/data/search/original-products.v1.json'"));
+  assert.ok(home.includes("catalogReady=false,catalogError=false"));
+  assert.ok(!home.includes('Keine aktuellen Preise als Live'));
+
   assert.ok(home.includes('videos.pexels.com/video-files/6031880'));
   assert.ok(category.includes('nbh49-products-hero'));
   assert.ok(category.includes('nbh49-products-grid'));

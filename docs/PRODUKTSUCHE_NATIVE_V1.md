@@ -6,7 +6,7 @@ Diese Änderung erweitert den veröffentlichten NBHandel-Stand aus GitHub main. 
 
 ## Bearbeiteter Funktionsumfang
 
-- Homepage (site/index.html): Der vorhandene v34/v60-Produktsuchbereich wird mit denselben Bedienelementen weiterverwendet. Alle 24 bisherigen Produktbeispiele erscheinen statt nur sieben mit historischen Preisen. Eingaben führen direkt zu /produkte?q=Suchbegriff.
+- Homepage (site/index.html): Der vorhandene v34/v60-Produktsuchbereich wird mit denselben Bedienelementen weiterverwendet. Alle 24 bisherigen Produktbeispiele erscheinen statt nur sieben mit historischen Preisen. Homepage und Produktübersicht lesen nun dieselbe lokale Katalogdatei; die Datenquelle enthält bewusst keine Händlerpreise. Eingaben führen direkt zu /produkte?q=Suchbegriff.
 - Produktseite (site/produkte.html): Direkt im bisherigen dunklen Hero erscheint ein Suchformular. Ergebnisse, Kategoriefilter und Produktdetails erscheinen im normalen Inhaltsfluss darüberliegender oder danebenliegender bestehender Texte wird nichts gelegt. Die sieben bisherigen großen Kategoriekarten und Kaufwerkzeug-Links bleiben unverändert.
 - CSS (site/assets/search/native-search.css): Nur gezielte Zusatzstile passend zur bisherigen NBHandel-v49-Gestaltung.
 - Suchmodul (site/assets/search/native-search.mjs): Sichere Treffer-, Detail- und Filterdarstellung aus einem kleinen lokalen Datensatz.

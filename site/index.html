@@ -733,13 +733,25 @@ function build(attempt){
  (function initProductSearch(){
    var input=main.querySelector('#nbh60SearchInput'),button=main.querySelector('#nbh60SearchButton'),results=main.querySelector('#nbh60SearchResults');
    if(!input||!button||!results)return;
-   // Reuse the 24 ORIGINAL product labels already included in the existing
-   // website. Do not use historical price data as live offers.
-   var source=document.getElementById('nbh-functions-v40-js');
-   var match=source&&(source.textContent||'').match(/const\s+PRODUCTS\s*=\s*(\[[\s\S]*?\])\s*;/);
-   var products=[];
-   try{products=match?JSON.parse(match[1]):[]}catch(_){products=[]}
-   products=products.filter(function(p){return p&&p.slug&&p.name&&p.cat;});
+   // One same-origin source for homepage suggestions AND the product overview.
+   // It deliberately contains no historic prices, feed credentials or merchant URLs.
+   var products=[],catalogReady=false,catalogError=false;
+   fetch('/data/search/original-products.v1.json',{credentials:'same-origin',cache:'no-store'})
+     .then(function(resp){if(!resp.ok)throw new Error('Katalog nicht erreichbar');return resp.json();})
+     .then(function(data){
+       if(data.schema!=='nbh.productfinder.v1'||data.mode!=='sample'||
+          !data.activation||data.activation.offersEnabled!==false||
+          !Array.isArray(data.products)||data.products.length!==24||
+          !Array.isArray(data.offers)||data.offers.length)throw new Error('Katalogfreigabe fehlt');
+       products=data.products.filter(function(p){return p&&p.id&&p.title&&p.category;})
+         .map(function(p){return {slug:p.id,name:p.title,cat:p.category};});
+       if(products.length!==24)throw new Error('Katalog unvollständig');
+       catalogReady=true;
+       if(document.activeElement===input||input.value.trim())render();
+     }).catch(function(){
+       catalogReady=false;catalogError=true;products=[];
+       if(document.activeElement===input||input.value.trim())render();
+     });
    var nav=function(q,selected){
      var url='/produkte?q='+encodeURIComponent((q||'').trim());
      if(selected)url+='&product='+encodeURIComponent(selected);
@@ -748,6 +760,14 @@ function build(attempt){
    function render(){
      var q=(input.value||'').trim().toLocaleLowerCase('de-DE');
      results.replaceChildren();
+     if(!catalogReady){
+       var waiting=document.createElement('div'),box=document.createElement('div'),title=document.createElement('b'),hint=document.createElement('span');
+       waiting.className='nbh60-search-result';
+       title.textContent=catalogError?'Produktsuche vorübergehend nicht verfügbar':'Produktkatalog wird geladen …';
+       hint.textContent=catalogError?'Die Produktübersicht und Kaufwerkzeuge bleiben erreichbar.':'Einen Moment, die Beispieldaten werden geladen.';
+       box.append(title,hint);waiting.append(box);results.append(waiting);
+       results.classList.add('open');return;
+     }
      var matches=products.filter(function(p){return !q||((p.name+' '+p.cat).toLocaleLowerCase('de-DE').includes(q))}).slice(0,6);
      if(!matches.length){
        var empty=document.createElement('div');empty.className='nbh60-search-result';
