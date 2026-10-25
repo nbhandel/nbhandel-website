@@ -12,6 +12,7 @@
   <link rel="icon" href="/favicon-32.png" sizes="32x32">
   <link rel="stylesheet" href="/assets/productfinder/finder.css">
   <link rel="stylesheet" href="/assets/productfinder/commerce-pages.css">
+  <link rel="stylesheet" href="/assets/productfinder/story-sections.css">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="NBHandel">
   <meta property="og:title" content="NBHandel – Produkte finden und vergleichen">
@@ -86,6 +87,18 @@
       </div>
     </section>
 
+    <section class="nbl-film-story" aria-labelledby="nbl-story-title">
+      <div class="pf-wrap nbl-story-grid">
+<figure class="nbl-film nbl-story-visual" data-nbl-motion><div class="nbl-film-stage"><video class="nbl-film-video" width="960" height="540" muted playsinline loop preload="none" poster="/media/story/buyer-poster.jpg" data-src="/media/story/buyer.mp4" data-webm="/media/story/buyer.webm" aria-label="Symbolaufnahme: Bestellvorbereitung und Pakete" tabindex="-1"></video><button class="nbl-film-toggle" type="button" aria-label="Video abspielen" aria-pressed="false">▶ Abspielen</button></div><figcaption>Symbolaufnahme · <a href="https://www.pexels.com/videos/" rel="noopener noreferrer" target="_blank">Pexels</a></figcaption></figure>
+        <div class="nbl-story-text">
+          <p class="nbl-section-kicker">FINDEN. PRÜFEN. WEITERKOMMEN.</p>
+          <h2 id="nbl-story-title">Vom passenden Produkt zum guten Kauf.</h2>
+          <p>NBHandel verbindet eine einfache Produktsuche mit nachvollziehbaren Entscheidungswerkzeugen. Später ergänzen wir dazu geprüfte Händlerangebote und die passenden Kaufmöglichkeiten.</p>
+          <a href="/produktfinder">Produktfinder entdecken <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
     <section class="nbl-section pf-wrap" aria-labelledby="nbl-categories-title">
       <div class="nbl-section-heading">
         <div><p class="nbl-section-kicker">PRODUKTWELTEN</p><h2 id="nbl-categories-title">Eine Suche. Viele Bereiche.</h2><p>Wähle einen Bereich oder suche direkt nach dem Produkt. Die Datenqualität entscheidet, welche Angebote später vergleichbar werden.</p></div>
@@ -101,9 +114,30 @@
       </div>
     </section>
 
+    <section class="nbl-gallery-section" aria-labelledby="nbl-gallery-title">
+      <div class="pf-wrap">
+        <div class="nbl-gallery-top">
+          <div><p class="nbl-section-kicker">PRODUKTE ENTDECKEN</p><h2 id="nbl-gallery-title">Beispiele aus unserem Produktfinder.</h2>
+            <p>Bestehende Produktbeispiele aus verschiedenen Bereichen. Noch keine bestätigten Livepreise oder Händlerangebote.</p></div>
+          <div class="nbl-gallery-controls" role="group" aria-label="Beispielprodukte durchblättern">
+            <button id="nbl-gallery-prev" type="button" aria-label="Vorherige Produkte" disabled>←</button>
+            <button id="nbl-gallery-next" type="button" aria-label="Weitere Produkte">→</button>
+          </div>
+        </div>
+        <div class="nbl-gallery-track" id="nbl-gallery-track" role="list" aria-label="Beispielprodukte">
+          <p>Produktbeispiele werden geladen …</p>
+        </div>
+        <a class="nbl-gallery-all" href="/produktfinder">Alle Beispielartikel durchsuchen <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
     <section class="nbl-method">
       <div class="pf-wrap">
+        <div class="nbl-process-feature">
+          <div class="nbl-process-feature-copy">
         <div class="nbl-section-heading nbl-method-heading"><div><p class="nbl-section-kicker">UNSER PRINZIP</p><h2>Erst identifizieren. Dann vergleichen.</h2><p>Ein ähnlicher Name macht zwei Artikel noch nicht identisch. Wir trennen bewusst die Produktsuche von der Bewertung konkreter Händlerangebote.</p></div><a class="nbl-inline-link" href="/methodik">Unsere Methodik <span aria-hidden="true">→</span></a></div>
+          </div>
+<figure class="nbl-film nbl-process-visual" data-nbl-motion><div class="nbl-film-stage"><video class="nbl-film-video" width="960" height="540" muted playsinline loop preload="none" poster="/media/story/method-poster.jpg" data-src="/media/story/method.mp4" data-webm="/media/story/method.webm" aria-label="Symbolaufnahme: Kaufberatung und Sortimentsprüfung" tabindex="-1"></video><button class="nbl-film-toggle" type="button" aria-label="Video abspielen" aria-pressed="false">▶ Abspielen</button></div><figcaption>Symbolaufnahme · <a href="https://www.pexels.com/videos/" rel="noopener noreferrer" target="_blank">Pexels</a></figcaption></figure>        </div>
         <div class="nbl-steps">
           <article><span class="nbl-step-number">01</span><h3>Richtiges Produkt</h3><p>Marke, Modell, Variante und – wo verfügbar – eindeutige Produktkennung berücksichtigen.</p></article>
           <article><span class="nbl-step-number">02</span><h3>Geprüftes Angebot</h3><p>Händler, Datenquelle, Verfügbarkeit und Produktzuordnung müssen nachvollziehbar sein.</p></article>
@@ -114,17 +148,29 @@
 
     <section class="nbl-section pf-wrap" aria-labelledby="nbl-tools-title">
       <div class="nbl-section-heading"><div><p class="nbl-section-kicker">SOFORT NUTZBAR</p><h2 id="nbl-tools-title">Werkzeuge, die beim Kauf helfen.</h2><p>Auch ohne angebundenen Händlerfeed kannst du Angebote prüfen und eigene Vergleiche erstellen.</p></div><a class="nbl-inline-link" href="/tools">Alle Werkzeuge <span aria-hidden="true">→</span></a></div>
-      <div class="nbl-tool-grid">
-        <a href="/angebotsvergleich"><span>⇄</span><h3>Angebotsvergleich</h3><p>Mehrere selbst eingetragene Angebote inklusive Versand nebeneinanderstellen.</p><strong>Vergleich starten →</strong></a>
-        <a href="/gesamtpreisrechner"><span>€</span><h3>Gesamtpreisrechner</h3><p>Artikelpreis, Versand und weitere Pflichtkosten zu einem Kaufpreis zusammenführen.</p><strong>Preis berechnen →</strong></a>
-        <a href="/produktpass"><span>▤</span><h3>Produktpass</h3><p>Produktkennungen und Varianten lokal dokumentieren, damit Vergleiche stimmen.</p><strong>Produktpass öffnen →</strong></a>
+      <div class="nbl-tool-grid nbl-tool-motion-grid">
+        <article class="nbl-tool-motion-card">
+<figure class="nbl-film nbl-tool-visual" data-nbl-motion><div class="nbl-film-stage"><video class="nbl-film-video" width="960" height="540" muted playsinline loop preload="none" poster="/media/story/scanner-poster.jpg" data-src="/media/story/scanner.mp4" data-webm="/media/story/scanner.webm" aria-label="Symbolaufnahme: ein Produkt im Geschäft betrachten" tabindex="-1"></video><button class="nbl-film-toggle" type="button" aria-label="Video abspielen" aria-pressed="false">▶ Abspielen</button></div><figcaption>Symbolaufnahme · <a href="https://www.pexels.com/videos/" rel="noopener noreferrer" target="_blank">Pexels</a></figcaption></figure>          <div class="nbl-tool-motion-copy"><h3>Barcode scannen</h3><p>EAN/GTIN per Kamera erfassen, lokal übernehmen und in weiteren Tools verwenden.</p><a href="/barcode-scanner">Scanner öffnen <span aria-hidden="true">→</span></a></div>
+        </article>
+        <article class="nbl-tool-motion-card">
+<figure class="nbl-film nbl-tool-visual" data-nbl-motion><div class="nbl-film-stage"><video class="nbl-film-video" width="960" height="540" muted playsinline loop preload="none" poster="/media/story/comparison-poster.jpg" data-src="/media/story/comparison.mp4" data-webm="/media/story/comparison.webm" aria-label="Symbolaufnahme: Einkaufen mit dem Smartphone" tabindex="-1"></video><button class="nbl-film-toggle" type="button" aria-label="Video abspielen" aria-pressed="false">▶ Abspielen</button></div><figcaption>Symbolaufnahme · <a href="https://www.pexels.com/videos/" rel="noopener noreferrer" target="_blank">Pexels</a></figcaption></figure>          <div class="nbl-tool-motion-copy"><h3>Angebotsvergleich</h3><p>Eigene Angebote mit Gesamtpreis, Versand und Zustand nachvollziehbar gegenüberstellen.</p><a href="/angebotsvergleich">Angebote vergleichen <span aria-hidden="true">→</span></a></div>
+        </article>
+        <article class="nbl-tool-motion-card">
+<figure class="nbl-film nbl-tool-visual" data-nbl-motion><div class="nbl-film-stage"><video class="nbl-film-video" width="960" height="540" muted playsinline loop preload="none" poster="/media/story/tools-poster.jpg" data-src="/media/story/tools.mp4" data-webm="/media/story/tools.webm" aria-label="Symbolaufnahme: Laptop bei der Recherche" tabindex="-1"></video><button class="nbl-film-toggle" type="button" aria-label="Video abspielen" aria-pressed="false">▶ Abspielen</button></div><figcaption>Symbolaufnahme · <a href="https://www.pexels.com/videos/" rel="noopener noreferrer" target="_blank">Pexels</a></figcaption></figure>          <div class="nbl-tool-motion-copy"><h3>Kaufrechner & Tools</h3><p>Gesamtpreis, Versand, Rabatt und andere Kaufkosten direkt im Browser prüfen.</p><a href="/tools">Alle Tools öffnen <span aria-hidden="true">→</span></a></div>
+        </article>
       </div>
     </section>
 
-    <section class="pf-wrap nbl-partner-banner">
-      <div><p class="nbl-section-kicker">FÜR HÄNDLER &amp; DATENPARTNER</p><h2>Ein guter Vergleich beginnt mit guten Daten.</h2><p>NBHandel ist offen für autorisierte Produktfeeds und strukturierte Angebote von passenden Händlern und Lieferanten.</p></div>
-      <a href="/partner">Partnerinformationen <span aria-hidden="true">→</span></a>
-    </section>
+    <section class="pf-wrap nbl-partner-banner nbl-partner-film" aria-labelledby="nbl-partner-title">
+      <div class="nbl-partner-copy">
+        <p class="nbl-section-kicker">FÜR HÄNDLER &amp; DATENPARTNER</p>
+        <h2 id="nbl-partner-title">Ein guter Vergleich beginnt mit guten Daten.</h2>
+        <p>Wir arbeiten an einer Plattform für Produktinformationen und nachvollziehbare Angebote. Dafür suchen wir Händler mit autorisierten Produkt-, Preis- und Bestandsdaten.</p>
+        <a href="/partner">Partnerinformationen <span aria-hidden="true">→</span></a>
+      </div>
+<figure class="nbl-film nbl-partner-visual" data-nbl-motion><div class="nbl-film-stage"><video class="nbl-film-video" width="960" height="540" muted playsinline loop preload="none" poster="/media/story/partner-poster.jpg" data-src="/media/story/partner.mp4" data-webm="/media/story/partner.webm" aria-label="Symbolaufnahme: Versandvorbereitung im Lager" tabindex="-1"></video><button class="nbl-film-toggle" type="button" aria-label="Video abspielen" aria-pressed="false">▶ Abspielen</button></div><figcaption>Symbolaufnahme · <a href="https://www.pexels.com/videos/" rel="noopener noreferrer" target="_blank">Pexels</a></figcaption></figure>    </section>
+    <script type="module" src="/assets/productfinder/story-motion.mjs"></script>
+    <script type="module" src="/assets/productfinder/featured-gallery.mjs"></script>
   </main>
 
   <footer class="pf-footer">

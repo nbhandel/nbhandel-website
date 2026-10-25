@@ -55,10 +55,10 @@ def main() -> None:
         assert 'nbh-functions-v40-js' not in page, route
         assert 'nbh59-carousel' not in page, route
         assert 'Webflow. https://webflow.com' not in page, route
-        assert not re.search(r"\\d{2,5},\\d{2}\\s*€", page), "stale example prices in " + route
+        assert not re.search(r"\d{2,5},\d{2}\s*€", page), "stale example prices in " + route
     for route in ("index", "produkte", "produktfinder"):
         page = (ROOT / (route + ".html")).read_text(encoding="utf-8")
-        for ref in re.findall(r'\\b(?:src|href)="([^"]+)"', page):
+        for ref in re.findall(r'\b(?:src|href)="([^"]+)"', page):
             if not ref.startswith("/") or ref.startswith("//"):
                 continue
             short = urlsplit(ref).path.lstrip("/")
@@ -66,6 +66,29 @@ def main() -> None:
                 continue
             path = ROOT / unquote(short)
             assert path.is_file() or (ROOT / (unquote(short) + ".html")).is_file(), f"Missing {ref} on {route}"
+
+    media = json.loads(Path("docs/restored-existing-videos.json").read_text(encoding="utf-8"))
+    assert media["schema"] == "nbh.media.story.v1"
+    assert set(media["clips"]) == {"buyer", "partner", "scanner", "comparison", "tools", "method"}
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    categories = (ROOT / "produkte.html").read_text(encoding="utf-8")
+    assert home.count('<video class="nbl-film-video"') == 6
+    assert categories.count('<video class="nbl-film-video"') == 1
+    assert "/assets/productfinder/story-motion.mjs" in home
+    assert "/assets/productfinder/featured-gallery.mjs" in home
+    for key, clip in media["clips"].items():
+        for ref, hash_key in [("src","sha256"), ("webm_src","webm_sha256"), ("poster","poster_sha256")]:
+            loc = clip[ref]
+            assert loc.startswith("/media/story/") and ".." not in loc
+            file = ROOT / loc.lstrip("/")
+            assert file.is_file(), loc
+            assert hashlib.sha256(file.read_bytes()).hexdigest() == clip[hash_key], loc
+        assert f'data-src="/media/story/{key}.mp4"' in home
+        assert f'data-webm="/media/story/{key}.webm"' in home
+    for page in (home, categories):
+        assert "https://videos.pexels.com" not in page
+        assert "https://www.pexels.com/download/video/" not in page
+
     found_assets, sri_checked = 0, 0
     for route in routes:
         filepath = ROOT / ("index.html" if not route else route + ".html")

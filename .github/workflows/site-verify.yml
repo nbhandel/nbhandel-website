@@ -37,7 +37,7 @@ jobs:
       - name: Check only locally stored site, assets and integrity
         run: python3 tools/verify_site.py site
       - name: Test Produktfinder identity and rights validation
-        run: node --test tests/productfinder/finder-core.test.mjs
+        run: node --test tests/productfinder/*.test.mjs
       - name: Verify no generated import or network fetch in production path
         shell: bash
         run: |

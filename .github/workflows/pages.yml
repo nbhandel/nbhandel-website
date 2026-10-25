@@ -32,7 +32,7 @@ jobs:
       - name: Check public source (no Webflow/affiliate API access)
         run: python3 tools/verify_site.py site
       - name: Test Produktfinder identity and feed-rights gates
-        run: node --test tests/productfinder/finder-core.test.mjs
+        run: node --test tests/productfinder/*.test.mjs
       - name: Assemble production files strictly from this commit
         shell: bash
         run: |
