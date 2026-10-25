@@ -146,8 +146,11 @@ test('only current fully approved offers are sorted by total incl shipping', () 
   assert.equal(euros(result[0].totalCents), '100,00\u00a0€');
 });
 
-test('core keeps sample catalog clean of any outbound commerce links', () => {
+test('sample catalog includes only its prior credited images, not merchant offers', () => {
   const text = JSON.stringify(sample);
-  assert.equal(/https?:\/\//.test(text), false);
   assert.equal(/priceCents|shippingCents|deepLink/.test(text), false);
+  assert.equal(sample.offers.length, 0);
+  assert.ok(sample.products.every(p => p.image?.startsWith('/vendor/webflow/')));
+  assert.ok(sample.products.every(p => p.imageCredit && p.imageCreditUrl?.startsWith('https://commons.wikimedia.org/wiki/')));
+  assert.ok(sample.products.every(p => !('url' in p) && !('priceCents' in p)));
 });

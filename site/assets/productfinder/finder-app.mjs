@@ -94,6 +94,18 @@ function showDetails(product) {
     'Identität: ' + productIdentityLabel(product) +
     '. Ein Beispielname allein bestätigt weder eine GTIN noch die Kompatibilität mit einem bestimmten Gerät oder Fahrzeug.'));
 
+  if (dataset.mode === 'sample' && product.imageCredit &&
+      typeof product.imageCreditUrl === 'string' &&
+      product.imageCreditUrl.startsWith('https://commons.wikimedia.org/wiki/')) {
+    const attribution = make('p', 'pf-image-credit', 'Bildnachweis: ' + product.imageCredit + ' · ');
+    const source = make('a', '', 'Originalquelle und Lizenz');
+    source.href = product.imageCreditUrl;
+    source.rel = 'noopener noreferrer';
+    source.target = '_blank';
+    attribution.append(source);
+    detail.append(attribution);
+  }
+
   const offers = eligibleOffers(dataset, product);
   const list = make('div', 'pf-offers');
   if (!offers.length) {
@@ -120,9 +132,22 @@ function showDetails(product) {
 
 function renderProduct(product) {
   const card = make('article', 'pf-card');
-  const top = make('div', 'pf-card-top');
-  top.append(make('span', 'pf-card-icon', describeCategory(product.category)));
-  top.append(make('span', 'pf-card-badge', dataset.mode === 'sample' ? 'Beispielartikel' : 'Artikel'));
+  const approvedSampleImage = dataset.mode === 'sample' && typeof product.image === 'string' &&
+    product.image.startsWith('/vendor/webflow/') && !product.image.includes('..') &&
+    /\.(?:webp|jpe?g|png)$/i.test(product.image);
+  const top = make('div', approvedSampleImage ? 'pf-card-media' : 'pf-card-top');
+  if (approvedSampleImage) {
+    const img = make('img');
+    img.src = product.image;
+    img.alt = 'Beispielbild: ' + product.title;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    top.append(img);
+    top.append(make('span', 'pf-card-image-label', 'Beispielartikel'));
+  } else {
+    top.append(make('span', 'pf-card-icon', describeCategory(product.category)));
+    top.append(make('span', 'pf-card-badge', dataset.mode === 'sample' ? 'Beispielartikel' : 'Artikel'));
+  }
   card.append(top);
 
   const body = make('div', 'pf-card-body');

@@ -17,7 +17,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35ab0b448cc8d621441c_product-airpods-pro-3.webp",
+      "imageCredit": "Burkhard Mücke · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:AirPods_Pro_3_in_wei%C3%9F.jpg"
     },
     {
       "id": "switch-2",
@@ -29,7 +32,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf38722d83ff3a13367741_product-nintendo-switch-2-quality.webp",
+      "imageCredit": "PantheraLeo1359531 · CC BY 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Nintendo_Switch_2-Konsole_VL_20250606.png"
     },
     {
       "id": "ps5-pro",
@@ -41,7 +47,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35bee332dcaa9ff8109b_product-ps5-pro.webp",
+      "imageCredit": "BeatEmUps · CC BY 3.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:PlayStation_5_Pro_no_disc_drive.jpg"
     },
     {
       "id": "meta-quest-3-512",
@@ -53,7 +62,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35c0214c97825113c398_product-meta-quest-3.webp",
+      "imageCredit": "Kyu3a · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Meta_Quest_3_-_3.jpg"
     },
     {
       "id": "mx-master-3s",
@@ -65,7 +77,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35c12777ec6aef320640_product-logitech-mx-master-3s.webp",
+      "imageCredit": "Hayden Schiff · CC BY 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Logitech_MX_Master_3S_HS17.jpg"
     },
     {
       "id": "bose-qc-ultra-earbuds",
@@ -77,7 +92,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35c30fec45f0eaf803c2_product-bose-qc-ultra-earbuds.webp",
+      "imageCredit": "Kyu3a · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Bose_QuietComfort_Ultra_Earbuds_-_3.jpg"
     },
     {
       "id": "galaxy-s25-plus",
@@ -89,7 +107,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35c46c2d73c95f6fad20_product-samsung-galaxy-s25-plus.webp",
+      "imageCredit": "Jakub CA · CC BY 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S25%2B.jpg"
     },
     {
       "id": "galaxy-s25-ultra",
@@ -101,7 +122,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf358f6c64ad816bdd3dcf_product-samsung-galaxy-s25-ultra.webp",
+      "imageCredit": "Jakub CA · CC BY 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S25_Ultra.jpg"
     },
     {
       "id": "macbook-air-m4",
@@ -113,7 +137,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf3591d8c41f53c30e6406_product-macbook-air-m4.webp",
+      "imageCredit": "AzureSaturn · CC0 1.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:MacBook_Air_(13-inch,_M4,_Silver).jpg"
     },
     {
       "id": "steam-deck-oled-512",
@@ -125,7 +152,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35937c8f61c631475143_product-steam-deck-oled.webp",
+      "imageCredit": "SparklesTrainNerd · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Steam_Deck_OLED_framsida_hemsk%C3%A4rm.jpg"
     },
     {
       "id": "dji-mini-4-pro",
@@ -137,7 +167,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf3596eb40b93313d5acb1_product-dji-mini-4-pro.webp",
+      "imageCredit": "Zbigniew Czernik · CC BY 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:DJI_Mini_4_Pro_z_walizk%C4%85.jpg"
     },
     {
       "id": "kindle-paperwhite-5",
@@ -149,7 +182,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35982d83ff3a1335f683_product-kindle-paperwhite-5.webp",
+      "imageCredit": "WrS.tm.pl · Public Domain",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Amazon_Kindle_Paperwhite_5_Eleventh_Generation_(C2V2L3)_6-inch_e-reader.jpg"
     },
     {
       "id": "apple-watch-ultra-2",
@@ -161,7 +197,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35e8dd1e5ab2ef674fd2_product-apple-watch-ultra-2.webp",
+      "imageCredit": "Pangalau · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Apple_Watch_Ultra_2.jpg"
     },
     {
       "id": "galaxy-watch-ultra",
@@ -173,7 +212,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35eb62fd1cb1989a7a0c_product-galaxy-watch-ultra.webp",
+      "imageCredit": "Kyu3a · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Galaxy_Watch_Ultra.jpg"
     },
     {
       "id": "xbox-series-x",
@@ -185,7 +227,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35eee1110d4a90c26929_product-xbox-series-x.webp",
+      "imageCredit": "茅野ふたば · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Xbox_Series_X_(July_8,_2026).jpg"
     },
     {
       "id": "iphone-16-pro",
@@ -197,7 +242,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf36170cbe283c19acd053_product-iphone-16-pro.webp",
+      "imageCredit": "Farragutful · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:IPhone_16_Pro_-_black.jpg"
     },
     {
       "id": "ipad-pro-m4",
@@ -209,7 +257,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf3619037d6b4358bbd31f_product-ipad-pro-m4.webp",
+      "imageCredit": "Piperpet · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:IPad_Pro_M4_11-inch.jpeg"
     },
     {
       "id": "airpods-max",
@@ -221,7 +272,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf361b214c97825113d956_product-airpods-max.webp",
+      "imageCredit": "SimonWaldherr · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Apple_AirPods_Max.jpg"
     },
     {
       "id": "dyson-v8",
@@ -233,7 +287,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf355b43ffd832022f5046_product-dyson-v8.webp",
+      "imageCredit": "Your Best Digs · CC BY 2.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Dyson_V8_handstick_vacuum.jpg"
     },
     {
       "id": "nivea-creme",
@@ -245,7 +302,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39d19e0c3304aae8a775_product-nivea-creme.webp",
+      "imageCredit": "Susana22BN · CC BY-SA 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Nivea_Creme.webp"
     },
     {
       "id": "adidas-stan-smith",
@@ -257,7 +317,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39d37c8f61c63148594a_product-adidas-stan-smith.webp",
+      "imageCredit": "Raizin · CC BY-SA 3.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Stan_Smith_white_and_green.png"
     },
     {
       "id": "moyu-rs3m",
@@ -269,7 +332,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39d7037d6b4358bcc2c7_product-moyu-speedcube.webp",
+      "imageCredit": "多多123 · CC BY 4.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Speedcube_MoYu.jpg"
     },
     {
       "id": "moleskine-pocket",
@@ -281,7 +347,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39d91fc15ed644a293d1_product-moleskine-pocket-notebook.webp",
+      "imageCredit": "Mack Male · CC BY-SA 2.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Moleskine_Ruled_Pocket_Notebook_(430658172).jpg"
     },
     {
       "id": "kong-classic",
@@ -293,7 +362,10 @@
       "gtin": null,
       "mpn": null,
       "identityStatus": "label_only",
-      "source": "existing_nbhandel_homepage_example"
+      "source": "existing_nbhandel_homepage_example",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39da0220514fd7f0f882_product-kong-classic.webp",
+      "imageCredit": "Hawkins · CC BY 2.0",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Dog_with_red_kong.jpg"
     }
   ],
   "offers": []
