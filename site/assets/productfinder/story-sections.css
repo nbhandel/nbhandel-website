@@ -97,7 +97,7 @@
 .nbl-tool-motion-copy h3 { font-size:20px; line-height:1.3; letter-spacing:-.025em; margin:12px 0 10px; }
 .nbl-tool-motion-copy p { color:#69768c; margin:0 0 20px; font-size:14px; line-height:1.65; flex:1; }
 .nbl-tool-grid .nbl-tool-motion-card a {
-  display:inline-flex; align-items:center; gap:12px; align-self:flex-start;
+  display:inline-flex; flex-direction:row; align-items:center; gap:12px; align-self:flex-start;
   border:0; border-radius:0; background:transparent; padding:0; box-shadow:none;
   color:#315fc5; font-size:13px; font-weight:800; text-decoration:none;
   margin:0; width:auto; min-height:0;
