@@ -2,7 +2,7 @@
 
 ## Ziel und Abgrenzung
 
-Diese Änderung erweitert den veröffentlichten NBHandel-Stand aus GitHub main. Sie ersetzt die Website NICHT. Die vorhandene Gestaltung, Navigation, Logo, Hintergrundvideos, Produktkarussell, sieben Kategorien, bestehenden Werkzeuge sowie die übrigen Seiten bleiben erhalten. Der zuvor verworfene Komplett-Neubau aus PR #2 wird nicht integriert.
+Diese Änderung erweitert den veröffentlichten NBHandel-Stand aus GitHub main. Sie ersetzt die Website NICHT. Die vorhandene Gestaltung, Navigation, Logo, Hintergrundvideos, Produktkarussell, sieben Kategorien, bestehenden Werkzeuge sowie die übrigen Seiten bleiben erhalten. Die alten Vergleichspreise sind ausdrücklich als archivierte Beispieldaten gekennzeichnet. Der zuvor verworfene Komplett-Neubau aus PR #2 wird nicht integriert.
 
 ## Bearbeiteter Funktionsumfang
 

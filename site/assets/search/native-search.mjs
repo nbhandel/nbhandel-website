@@ -155,6 +155,7 @@ async function init(){
     }
     const keepExpanded=expanded && matches.find(p=>p.id===expanded);
     if(!keepExpanded)closeDetail();
+    showall.hidden=Boolean(q||category.value);
     showall.textContent=showAll?'Weniger Beispiele anzeigen ↑':'Alle 24 Beispiele anzeigen ↓';
   }
   results.addEventListener('click',event=>{
