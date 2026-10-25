@@ -1,40 +1,33 @@
-# NBHandel – GitHub-geführter Live-Betrieb
+# NBHandel – Webflow gestalten, kostenlos über GitHub Pages veröffentlichen
 
-## Maßgebliche Quelle und Deployment
+## Verbindlicher Arbeitsweg ab 25.10.2026
 
-- Produktionsquellcode: Verzeichnis site/ in diesem Repository, Branch main.
-- Auslieferung: GitHub Pages, Domain nbhandel.de, ausschließlich via .github/workflows/pages.yml.
-- Deployment: Der Workflow prüft mit tools/verify_site.py und veröffentlicht nur den GitHub-Checkout von site/. Kein Live-Abruf von Webflow und keine Neuerzeugung von HTML zur Deploy-Zeit.
-- Änderungen: Feature-Branch mit Pull Request. Erst nach fachlicher Prüfung und Freigabe auf main zusammenführen.
-- Webflow: Historische Design-/Erstellungsquelle. Die aktuelle öffentliche Live-Version wurde anhand der veröffentlichten Sitemap mit 58 Routen einmalig als GitHub-Dateien eingefroren. Webflow nicht voreilig kündigen: bestehende externe Ressourcen können es noch benötigen.
+- Wir haben das Webflow-Design gekauft. **Webflow ist unsere visuelle Bearbeitungs- und Vorschauumgebung.**
+- Das bestehende Webflow-Projekt ist nbhandel-16b9f2 (Site-ID 6abedad969a74cbc62fc1fbe); kostenlose Vorschau: https://nbhandel-16b9f2.webflow.io/
+- **GitHub Pages bleibt das kostenlose Hosting für https://nbhandel.de.** Keine neue Site-Hosting-Buchung und kein Domain- oder DNS-Wechsel.
+- Der einzige reguläre Veröffentlichungsworkflow ist .github/workflows/pages.yml, ausschließlich manuell startbar; keine Push-/Zeit-Trigger.
+- Die 58 HTML-Seiten und 57 lokalisierten Webflow-Ressourcen im unveränderten GitHub-Verzeichnis site/ sind die Rückfallkopie vom 24.10.2026. **site/ ist keine zweite aktive Designquelle.**
+- tools/build_webflow_release.py erstellt eine getrennte Website-Kopie _site/ aus den in Webflow veröffentlichten Seiten. Die vorhandene Asset-Mirroring-/SRI-Routine aus tools/import_live_snapshot.py wird wiederverwendet.
+- Vor jedem Release muss tools/verify_site.py _site bestehen. Ein Build ist keine Veröffentlichung.
 
-## Nachgewiesene Baseline
+## Kontrolle und Veröffentlichung
 
-- 58 öffentliche HTML-Seiten mit Tools, Design, Impressum, Datenschutz und Transparenz.
-- 57 eigene CDN-Ressourcen (CSS, JS, Bilder) lokalisiert nach site/vendor/webflow/.
-- 289 Subresource-Integrity-Verweise an die lokalisierten Dateien angepasst und geprüft.
-- 127 GitHub-Quelldateien im site/-Verzeichnis, etwa 34 MB.
-- Details: docs/github-live-source-manifest.json.
-- Das Importskript tools/import_live_snapshot.py war ausschließlich für den einmaligen Import vorgesehen. Es ist kein regulärer Live-Workflow.
+1. Die vorhandene v60-Gestaltung in **Webflow** bearbeiten. Nicht nebenher in GitHub ein neues Design entwerfen.
+2. Im Webflow Designer die Vorschau für Desktop und Mobil kontrollieren und die gewünschte Fassung unter der kostenlosen Webflow-Testadresse veröffentlichen. Das ändert nbhandel.de nicht.
+3. GitHub Actions → **NBHandel | Webflow-Vorschau → GitHub Pages** → Run workflow → **preview**: Website-Snapshot erzeugen, prüfen und als Artefakt ablegen. Keine Live-Änderung.
+4. Nach tatsächlicher visueller und fachlicher Freigabe denselben Workflow mit **publish** starten. Nur dieser Schritt aktualisiert nbhandel.de.
+5. Anschließend echten Live-Readback durchführen: Startseite, Produktsuche, Scanner/Tools, mobile Darstellung, CSS/Bilder, Datenschutz und Impressum. Erst nach diesem Beleg als veröffentlicht melden.
 
-## Aktive Workflows
+## Fehler und Rückfall
 
-1. .github/workflows/pages.yml: einziger Produktions-Deploy bei Änderungen an relevanten Dateien auf main oder manuellem Start.
-2. .github/workflows/site-verify.yml: Offline-Prüfung auf Branch und bei Pull Requests; deployt nichts.
+- Wenn Webflow-Abruf, Seitenzahl, wichtige bestehende Funktionen oder Asset-Integrität nicht stimmen: **kein Release**.
+- Der ausdrücklich manuell wählbare Modus **restore-github-backup** stellt die GitHub-Sicherung vom 24.10.2026 bereit. Er ist kein normaler Release.
+- Jeder Workflow-Lauf legt den gebauten Snapshot für 30 Tage als GitHub-Actions-Artefakt ab. Die bewahrte GitHub-Version und das Webflow-Projekt bleiben unabhängig erhalten.
+- Alte sync-live-v2.yml, sync-live-v3.yml und production-sync.yml bleiben archiviert und werden nicht parallel aktiviert.
 
-Frühere Webflow-Sync-Workflows und einmalige Migrations-/Systemd-Workflows sind ausschließlich als Nachweise unter docs/archived-deployment-workflows/ abgelegt. Diese niemals parallel reaktivieren.
+## Geschäftsrahmen
 
-## Regeln für Geschäftsbetrieb und Datenschutz
-
-- Keine neue Affiliate-Weiterleitung, kein Tracking-Skript, kein nicht notwendiges Cookie, kein Produktfeed ohne bestätigten Programm- und Nutzungsrechten.
-- Vorbehaltene Datenschutz-, Transparenz- und Cookie-Vorgaben nicht durch einen Website-Import überschreiben.
-- Externe Drittanbieter-Medien, Skripte und Schriftarten bestehen zum Teil weiterhin; vor einer vollständigen Selbst-Hosting-Behauptung gesondert prüfen.
-- Öffentliche Suche erst mit bestätigten nutzbaren Produktdaten, ohne erfundene Livepreise. Bei nur einem Angebot keine Aussage als günstigster Händler.
-- Niemals vertrauliche B2B-Einkaufspreise, E-Mails, Passwörter oder Authentifizierungsschlüssel in dieses öffentliche Repository übertragen.
-
-## Betrieb und Rückfallweg
-
-- Vor Release: CI-Prüfung, PR-Review, Hauptfunktionen und Rechtstexte prüfen.
-- Nach Release: nbhandel.de, Unterseiten, Bilder/CSS/JS, HTTPS und GitHub-Actions-Abschluss live prüfen.
-- Bei Regression: Freigegebenen Merge-Commit revertieren bzw. vorherige Git-Quelle wiederherstellen und den EINEN Pages-Workflow erneut ausführen; keine alten Webflow-Workflows reaktivieren.
-- Die Domain und DNS-Zuordnung bleiben unverändert.
+- Website und eBay sind gleichberechtigte Einstiegskanäle für einen zukünftig breiteren Onlinehandel.
+- Keine erfundenen Livepreise oder Händlerangebote, kein ungeprüfter Affiliate-Link und kein externes Tracking ohne entsprechende Freigaben.
+- Gekauftes Design, bestehende Produktsuche, Vergleichswerkzeuge, Scanner und Rechtstexte bleiben erhalten. Änderungen sind visuell und fachlich nachzuprüfen.
+- Der neue Google-Betriebs-Master steuert die aktuellen Aufgaben. Alte Master und alte Technikphasen gelten nicht als neue Arbeitsaufträge.
