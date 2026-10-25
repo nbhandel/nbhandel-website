@@ -2,18 +2,21 @@
 
 ## Ziel
 
-Mit der bestehenden Website weiterarbeiten, nicht parallel eine zweite Shop-Infrastruktur errichten. Die neue statische Produktfinder-Seite ist **ein isolierter, noch nicht öffentlich beworbener Entwicklungsstand**. Die 24 Produktnamen stammen aus dem bestehenden NBHandel-Startseitenkatalog. Es werden **keine alten Beispielpreise als aktuelle Angebote** übernommen.
+Mit der bestehenden Website weiterarbeiten, nicht parallel eine zweite Shop-Infrastruktur errichten. Der integrierte Redesign-Stand umfasst **Startseite, Produktübersicht und Produktfinder als echte HTML-Seiten** im aktuellen GitHub-Quellzweig. Die 24 Produktnamen stammen aus dem bestehenden NBHandel-Startseitenkatalog. Es werden **keine alten Beispielpreise als aktuelle Angebote** übernommen.
 
 Dateien:
+- site/index.html: neu strukturierte Startseite mit echter GET-Suche zum Finder, statt dynamisch überlagerter Webflow-Sektionen.
+- site/produkte.html: neu strukturierte Übersicht der sieben bereits vorhandenen Kategorie-Seiten.
 - site/produktfinder.html: eigenständige Suchoberfläche (zunächst noindex).
 - site/assets/productfinder/finder-core.mjs: reine Such-, GTIN-, Identitäts- und Freigabelogik.
 - site/assets/productfinder/finder-app.mjs: Anzeige und Nutzerinteraktion, keine Analytics.
-- site/assets/productfinder/finder.css: responsives Layout ohne externe Font- oder Code-Bibliothek.
-- site/data/productfinder/sample-catalog.v1.json: 24 bereits bestehende Produktbeispiele, keine Händlerangebote.
-- tools/seed_productfinder_catalog.py: einmalige, nachvollziehbare Extraktion der 24 Namen aus der vorhandenen Startseite.
+- site/assets/productfinder/finder.css: responsives Layout für den Finder samt gemeinsamer Navigation.
+- site/assets/productfinder/commerce-pages.css: gemeinsames Design für Start- und Produktübersicht; kein Overlay und keine alten inline DOM-Konstruktoren.
+- site/data/productfinder/sample-catalog.v1.json: 24 bereits bestehende Produktbeispiele, keine Händlerangebote, mit wiederverwendeten lokalen Bildern und ursprünglichen Bild-/Lizenznachweisen.
+- tools/seed_productfinder_catalog.py: reproduzierbare Erstellung des Beispielkatalogs aus docs/productfinder-existing-image-manifest.json; der Originalstand mit Bildnachweisen wurde vor dem Redesign aus der früheren Git-Version erfasst.
 - tests/productfinder/finder-core.test.mjs: automatische Regressionstests.
 
-Die produktive Startseitensuche wird vorerst **nicht ersetzt**. Eine Integration erfolgt erst nach Review und der ersten freigegebenen Datenquelle.
+Die bisherige Startseitensuche wurde im Entwicklungszweig durch eine **echte, in die Seite eingebettete Suchmaske** ersetzt, die per GET zum bestehenden Produktfinder führt. Das neue Layout erzeugt keine weiteren DOM-Schichten über den Texten. **Live bleibt bis zur Freigabe die veröffentlichte Version unverändert.**
 
 ## Datenmodell V1
 
@@ -44,7 +47,7 @@ Werden Bedingungen nicht erfüllt, zeigt der Finder **kein Angebot**. Ein einzel
 
 ## Grenzen
 
-- Die vorhandenen 24 Beispielnamen enthalten **keine verifizierten EAN/GTIN/MPN** und zeigen entsprechend keine Preise und keine Links.
+- Die vorhandenen 24 Beispielnamen enthalten **keine verifizierten EAN/GTIN/MPN** und zeigen entsprechend keine Preise und keine Händlerlinks; die bereits veröffentlichten CC-Bilder enthalten sichtbare Quell-/Lizenznachweise.
 - Die Oberfläche ist vor Freigabe **noindex** und nicht in der Sitemap. Keine Aktivierung von Partnerklicks oder Tracking.
 - Die aktuell vorhandenen historischen Beispielpreise auf der alten Startseite wurden nicht verändert oder importiert.
 - Der Browser lädt derzeit eine kleine statische JSON-Datei. **Ein Millionen-Katalog gehört nicht als Gesamtdatei in den Browser.** Dafür nach dokumentierter Feedfreigabe ein serverseitiges Indexierungs-/Suchkonzept mit Pagination und regelmäßiger Datenaktualisierung erarbeiten. Diese V1 legt lediglich die Identitäts- und Darstellungsregeln fest.
@@ -55,6 +58,7 @@ Werden Bedingungen nicht erfüllt, zeigt der Finder **kein Angebot**. Ein einzel
 
 - Node-Prüfung: node --test tests/productfinder/finder-core.test.mjs.
 - Statische Website-Prüfung: python3 tools/verify_site.py site.
-- HTTP-Preview auf isoliertem Testserver (GET der vier neuen Assets und JSON).
+- HTTP-Preview auf isoliertem Testserver (GET der neuen HTML-, CSS-, Modul- und JSON-Dateien).
+- Playwright Chromium: Startseite, Kategorien und Finder je in Desktop- und Mobilansicht; kein horizontaler Überlauf, kein Seitenfehler, Suchweiterleitung und Finder-Detailtest erfolgreich. Zusätzlich Kategorie- und Artikelbilder geprüft.
 - Vor produktiver Sichtbarkeit die Browser-Darstellung, mobile Navigation, Barrierefreiheit und rechtlichen Voraussetzungen abschließend prüfen.
 - Der bestehende Produktions-Deploy bleibt unabhängig. Kein Merge oder Live-Veröffentlichung ohne fachliche Freigabe.

@@ -1,0 +1,198 @@
+{
+  "origin": "previous_public_nbhandel_homepage",
+  "note": "No prices or merchant links; pre-existing image path and original attribution only",
+  "products": [
+    {
+      "slug": "airpods-pro-3",
+      "name": "Apple AirPods Pro 3",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35ab0b448cc8d621441c_product-airpods-pro-3.webp",
+      "credit": "Burkhard Mücke · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:AirPods_Pro_3_in_wei%C3%9F.jpg"
+    },
+    {
+      "slug": "switch-2",
+      "name": "Nintendo Switch 2",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf38722d83ff3a13367741_product-nintendo-switch-2-quality.webp",
+      "credit": "PantheraLeo1359531 · CC BY 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Nintendo_Switch_2-Konsole_VL_20250606.png"
+    },
+    {
+      "slug": "ps5-pro",
+      "name": "Sony PlayStation 5 Pro · 2 TB",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35bee332dcaa9ff8109b_product-ps5-pro.webp",
+      "credit": "BeatEmUps · CC BY 3.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:PlayStation_5_Pro_no_disc_drive.jpg"
+    },
+    {
+      "slug": "meta-quest-3-512",
+      "name": "Meta Quest 3 · 512 GB",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35c0214c97825113c398_product-meta-quest-3.webp",
+      "credit": "Kyu3a · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Meta_Quest_3_-_3.jpg"
+    },
+    {
+      "slug": "mx-master-3s",
+      "name": "Logitech MX Master 3S",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35c12777ec6aef320640_product-logitech-mx-master-3s.webp",
+      "credit": "Hayden Schiff · CC BY 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Logitech_MX_Master_3S_HS17.jpg"
+    },
+    {
+      "slug": "bose-qc-ultra-earbuds",
+      "name": "Bose QuietComfort Ultra Earbuds",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35c30fec45f0eaf803c2_product-bose-qc-ultra-earbuds.webp",
+      "credit": "Kyu3a · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Bose_QuietComfort_Ultra_Earbuds_-_3.jpg"
+    },
+    {
+      "slug": "galaxy-s25-plus",
+      "name": "Samsung Galaxy S25+ · 256 GB",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35c46c2d73c95f6fad20_product-samsung-galaxy-s25-plus.webp",
+      "credit": "Jakub CA · CC BY 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S25%2B.jpg"
+    },
+    {
+      "slug": "galaxy-s25-ultra",
+      "name": "Samsung Galaxy S25 Ultra",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf358f6c64ad816bdd3dcf_product-samsung-galaxy-s25-ultra.webp",
+      "credit": "Jakub CA · CC BY 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Samsung_Galaxy_S25_Ultra.jpg"
+    },
+    {
+      "slug": "macbook-air-m4",
+      "name": "Apple MacBook Air M4 · 13 Zoll",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf3591d8c41f53c30e6406_product-macbook-air-m4.webp",
+      "credit": "AzureSaturn · CC0 1.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:MacBook_Air_(13-inch,_M4,_Silver).jpg"
+    },
+    {
+      "slug": "steam-deck-oled-512",
+      "name": "Steam Deck OLED · 512 GB",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35937c8f61c631475143_product-steam-deck-oled.webp",
+      "credit": "SparklesTrainNerd · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Steam_Deck_OLED_framsida_hemsk%C3%A4rm.jpg"
+    },
+    {
+      "slug": "dji-mini-4-pro",
+      "name": "DJI Mini 4 Pro",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf3596eb40b93313d5acb1_product-dji-mini-4-pro.webp",
+      "credit": "Zbigniew Czernik · CC BY 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:DJI_Mini_4_Pro_z_walizk%C4%85.jpg"
+    },
+    {
+      "slug": "kindle-paperwhite-5",
+      "name": "Amazon Kindle Paperwhite · 11. Gen.",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35982d83ff3a1335f683_product-kindle-paperwhite-5.webp",
+      "credit": "WrS.tm.pl · Public Domain",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Amazon_Kindle_Paperwhite_5_Eleventh_Generation_(C2V2L3)_6-inch_e-reader.jpg"
+    },
+    {
+      "slug": "apple-watch-ultra-2",
+      "name": "Apple Watch Ultra 2",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35e8dd1e5ab2ef674fd2_product-apple-watch-ultra-2.webp",
+      "credit": "Pangalau · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Apple_Watch_Ultra_2.jpg"
+    },
+    {
+      "slug": "galaxy-watch-ultra",
+      "name": "Samsung Galaxy Watch Ultra",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35eb62fd1cb1989a7a0c_product-galaxy-watch-ultra.webp",
+      "credit": "Kyu3a · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Galaxy_Watch_Ultra.jpg"
+    },
+    {
+      "slug": "xbox-series-x",
+      "name": "Microsoft Xbox Series X",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf35eee1110d4a90c26929_product-xbox-series-x.webp",
+      "credit": "茅野ふたば · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Xbox_Series_X_(July_8,_2026).jpg"
+    },
+    {
+      "slug": "iphone-16-pro",
+      "name": "Apple iPhone 16 Pro",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf36170cbe283c19acd053_product-iphone-16-pro.webp",
+      "credit": "Farragutful · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:IPhone_16_Pro_-_black.jpg"
+    },
+    {
+      "slug": "ipad-pro-m4",
+      "name": "Apple iPad Pro M4 · 11 Zoll",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf3619037d6b4358bbd31f_product-ipad-pro-m4.webp",
+      "credit": "Piperpet · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:IPad_Pro_M4_11-inch.jpeg"
+    },
+    {
+      "slug": "airpods-max",
+      "name": "Apple AirPods Max",
+      "cat": "Technik & Elektronik",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf361b214c97825113d956_product-airpods-max.webp",
+      "credit": "SimonWaldherr · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Apple_AirPods_Max.jpg"
+    },
+    {
+      "slug": "dyson-v8",
+      "name": "Dyson V8",
+      "cat": "Haushalt & Wohnen",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf355b43ffd832022f5046_product-dyson-v8.webp",
+      "credit": "Your Best Digs · CC BY 2.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Dyson_V8_handstick_vacuum.jpg"
+    },
+    {
+      "slug": "nivea-creme",
+      "name": "NIVEA Creme",
+      "cat": "Beauty & Pflege",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39d19e0c3304aae8a775_product-nivea-creme.webp",
+      "credit": "Susana22BN · CC BY-SA 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Nivea_Creme.webp"
+    },
+    {
+      "slug": "adidas-stan-smith",
+      "name": "adidas Stan Smith · weiß/grün",
+      "cat": "Sport & Freizeit",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39d37c8f61c63148594a_product-adidas-stan-smith.webp",
+      "credit": "Raizin · CC BY-SA 3.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Stan_Smith_white_and_green.png"
+    },
+    {
+      "slug": "moyu-rs3m",
+      "name": "MoYu RS3 M Speedcube",
+      "cat": "Sammeln & Hobby",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39d7037d6b4358bcc2c7_product-moyu-speedcube.webp",
+      "credit": "多多123 · CC BY 4.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Speedcube_MoYu.jpg"
+    },
+    {
+      "slug": "moleskine-pocket",
+      "name": "Moleskine Ruled Pocket Notebook",
+      "cat": "Büro & Papier",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39d91fc15ed644a293d1_product-moleskine-pocket-notebook.webp",
+      "credit": "Mack Male · CC BY-SA 2.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Moleskine_Ruled_Pocket_Notebook_(430658172).jpg"
+    },
+    {
+      "slug": "kong-classic",
+      "name": "KONG Classic Hundespielzeug",
+      "cat": "Tierbedarf",
+      "image": "/vendor/webflow/6abedad969a74cbc62fc1fbe/6abf39da0220514fd7f0f882_product-kong-classic.webp",
+      "credit": "Hawkins · CC BY 2.0",
+      "creditUrl": "https://commons.wikimedia.org/wiki/File:Dog_with_red_kong.jpg"
+    }
+  ]
+}

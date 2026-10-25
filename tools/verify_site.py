@@ -42,6 +42,30 @@ def main() -> None:
     assert finder_data["mode"] == "sample"
     assert finder_data["activation"]["offersEnabled"] is False
     assert len(finder_data["products"]) == 24 and not finder_data["offers"]
+    assert all(p.get("image", "").startswith("/vendor/webflow/") for p in finder_data["products"])
+    assert all(p.get("imageCreditUrl", "").startswith("https://commons.wikimedia.org/wiki/") for p in finder_data["products"])
+    # The home and category landing are real semantic source files now, NOT
+    # Webflow text with a newer JavaScript-built layer inserted over it.
+    for route in ("index", "produkte"):
+        page = (ROOT / (route + ".html")).read_text(encoding="utf-8")
+        assert page.count("<main") == 1 and page.count("</main>") == 1, route
+        assert '<form' in page and 'action="/produktfinder"' in page, route
+        assert 'assets/productfinder/commerce-pages.css' in page, route
+        assert 'nbh-desktop-v34-guard-js' not in page, route
+        assert 'nbh-functions-v40-js' not in page, route
+        assert 'nbh59-carousel' not in page, route
+        assert 'Webflow. https://webflow.com' not in page, route
+        assert not re.search(r"\\d{2,5},\\d{2}\\s*€", page), "stale example prices in " + route
+    for route in ("index", "produkte", "produktfinder"):
+        page = (ROOT / (route + ".html")).read_text(encoding="utf-8")
+        for ref in re.findall(r'\\b(?:src|href)="([^"]+)"', page):
+            if not ref.startswith("/") or ref.startswith("//"):
+                continue
+            short = urlsplit(ref).path.lstrip("/")
+            if not short:
+                continue
+            path = ROOT / unquote(short)
+            assert path.is_file() or (ROOT / (unquote(short) + ".html")).is_file(), f"Missing {ref} on {route}"
     found_assets, sri_checked = 0, 0
     for route in routes:
         filepath = ROOT / ("index.html" if not route else route + ".html")
