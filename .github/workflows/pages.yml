@@ -1,14 +1,20 @@
-name: Deploy NBHandel Pages from GitHub source
+name: "NBHandel | Webflow-Vorschau → GitHub Pages"
 
+# Bought Webflow design is the visual authoring/staging source.
+# The existing GitHub site/ tree is kept untouched as a recovery copy.
+# Never deploy automatically from a push or directly from Webflow edits.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'site/**'
-      - '.github/workflows/pages.yml'
-      - 'tools/verify_site.py'
-      - 'docs/github-live-source-manifest.json'
   workflow_dispatch:
+    inputs:
+      operation:
+        description: "preview = nur prüfen; publish = Webflow live schalten; restore = GitHub-Sicherung"
+        type: choice
+        required: true
+        default: preview
+        options:
+          - preview
+          - publish
+          - restore-github-backup
 
 permissions:
   contents: read
@@ -20,37 +26,53 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  website:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout immutable GitHub source
+      - name: Checkout preserved source and recovery baseline
         uses: actions/checkout@v4
-      - name: Check public source (no Webflow/affiliate API access)
-        run: python3 tools/verify_site.py site
-      - name: Assemble production files strictly from this commit
+
+      - name: Prepare and verify exactly one website version
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p _site
-          cp -a site/. _site/
+          if [ "${{ inputs.operation }}" = "restore-github-backup" ]; then
+            cp -a site _site
+            echo "Using the frozen GitHub recovery baseline."
+          else
+            python3 tools/build_webflow_release.py
+          fi
+          python3 tools/verify_site.py _site
           test -s _site/index.html
           test -s _site/datenschutz.html
-          test -s _site/transparenz.html
           test -s _site/impressum.html
-          test "$(cat _site/CNAME)" = nbhandel.de
-          test -f _site/.nojekyll
-          echo 'Production source is GitHub checkout site/. No Webflow fetch.'
-      - name: Configure GitHub Pages
+          test -s _site/transparenz.html
+          echo "Prepared snapshot verified. No production change yet."
+
+      - name: Save the exact prepared website for review and recovery
+        uses: actions/upload-artifact@v4
+        with:
+          name: nbh-website-${{ inputs.operation }}-${{ github.run_number }}
+          path: _site/
+          include-hidden-files: true
+          retention-days: 30
+
+      - name: Configure free GitHub Pages hosting
+        if: ${{ inputs.operation != 'preview' }}
         uses: actions/configure-pages@v5
-      - name: Upload production artifact
-        uses: actions/upload-pages-artifact@v5
+
+      - name: Upload approved website to GitHub Pages
+        if: ${{ inputs.operation != 'preview' }}
+        uses: actions/upload-pages-artifact@v4
         with:
           path: _site
           include-hidden-files: true
-      - name: Deploy to GitHub Pages
+
+      - name: Publish only after explicit release selection
+        if: ${{ inputs.operation != 'preview' }}
         id: deployment
         uses: actions/deploy-pages@v4
